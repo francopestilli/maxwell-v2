@@ -38,7 +38,7 @@ report_items = []
 # == LOAD CONFIG ==
 config = load_config()
 
-raw_file = config.get('fif') or config.get('meg') or None
+raw_file = config.get('fif') or config.get('mne') or config.get('meg') or None
 if not raw_file or not os.path.isfile(raw_file):
     add_info_to_product(report_items, "FATAL: No MEG FIF file found. Set 'fif' in config.json.", "error")
     create_product_json(report_items)
@@ -165,7 +165,7 @@ method = "tSSS" if st_duration else "SSS"
 add_info_to_product(report_items, f"{method} applied successfully.", "good")
 
 # == SAVE OUTPUT ==
-out_fif = os.path.join('out_dir', 'meg.fif')
+out_fif = os.path.join('out_dir', 'raw.fif')
 raw_sss.save(out_fif, overwrite=True)
 add_info_to_product(report_items, f"Saved: {out_fif}", "info")
 
